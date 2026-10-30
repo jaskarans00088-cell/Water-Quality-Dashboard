@@ -43,7 +43,7 @@ def predict_with_chart(ph, Hardness, Solids, Chloramines, Sulfate, Conductivity,
         """
         return error_card, empty_fig
         
-    is_unsafe = (Turbidity > 5 or Trihalomethanes > 0.1 or ph > 8.5 or ph < 6.5 or 
+    is_unsafe = (Turbidity > 5 or Trihalomethanes > 80 or ph > 8.5 or ph < 6.5 or 
                  Solids > 1000 or Hardness > 500 or Sulfate > 500 or Chloramines > 4 or Organic_carbon > 2)
 
     conf = max(probability) * 100
@@ -456,14 +456,14 @@ with gr.Blocks(theme=gr.themes.Soft(primary_hue="cyan", secondary_hue="teal"), c
                 with gr.TabItem("🧪 Physical & Minerals"):
                     ph = gr.Slider(minimum=0.0, maximum=14.0, step=0.1, value=7.2, label="pH Level")
                     hardness = gr.Slider(minimum=0.0, maximum=1000.0, step=1.0, value=150.0, label="Hardness (mg/L)")
-                    solids = gr.Slider(minimum=0.0, maximum=3000.0, step=10.0, value=300.0, label="Solids / TDS (mg/L)")
-                    conductivity = gr.Slider(minimum=0.0, maximum=2000.0, step=10.0, value=400.0, label="Conductivity (µS/cm)")
+                    solids = gr.Slider(minimum=0.0, maximum=3000.0, step=1.0, value=300.0, label="Solids / TDS (mg/L)")
+                    conductivity = gr.Slider(minimum=0.0, maximum=2000.0, step=1.0, value=400.0, label="Conductivity (µS/cm)")
                 
                 with gr.TabItem("⚗️ Chemical & Organics"):
                     chloramines = gr.Slider(minimum=0.0, maximum=12.0, step=0.1, value=2.0, label="Chloramines (mg/L)")
-                    sulfate = gr.Slider(minimum=0.0, maximum=1000.0, step=5.0, value=100.0, label="Sulfate (mg/L)")
+                    sulfate = gr.Slider(minimum=0.0, maximum=1000.0, step=1.0, value=100.0, label="Sulfate (mg/L)")
                     organic_carbon = gr.Slider(minimum=0.0, maximum=30.0, step=0.1, value=1.0, label="Organic Carbon / TOC (mg/L)")
-                    trihalomethanes = gr.Slider(minimum=0.0, maximum=0.5, step=0.01, value=0.05, label="Trihalomethanes / THMs (mg/L)")
+                    trihalomethanes = gr.Slider(minimum=0.0, maximum=80, step=0.1, value=0.05, label="Trihalomethanes / THMs (mg/L)")
                     turbidity = gr.Slider(minimum=0.0, maximum=10.0, step=0.1, value=0.5, label="Turbidity (NTU)")
 
             submit_btn = gr.Button("🔍 Predict Water Safety", variant="primary", size="lg")
