@@ -44,7 +44,7 @@ def predict_with_chart(ph, Hardness, Solids, Chloramines, Sulfate, Conductivity,
         return error_card, empty_fig
         
     is_unsafe = (Turbidity > 5 or Trihalomethanes > 80 or ph > 8.5 or ph < 6.5 or 
-                 Solids/TDS > 1000 or Hardness > 500 or Sulfate > 500 or Chloramines > 4 or Organic_carbon > 2)
+                 Solids > 1000 or Hardness > 500 or Sulfate > 500 or Chloramines > 4 or Organic_carbon > 2)
 
     conf = max(probability) * 100
     
